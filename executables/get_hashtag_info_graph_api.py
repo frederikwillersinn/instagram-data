@@ -2,6 +2,9 @@
 Instagram Graph API and writes the repsonse to csv. """
 import os
 import sys
+
+import pandas as pd
+
 sys.path.insert(1, os.path.join(sys.path[0], ".."))  # allow import from parent dir
 import settings as s
 from utils import append_dict_to_csv
@@ -39,7 +42,7 @@ def get_hashtag_posts_graph_api(params: dict, paging_url: str = "") -> dict:
     """
     endpoint_params = {
         "user_id": params["instagram_account_id"],
-        "fields": "id,children,caption,comment_count,like_count,media_type,media_url,permalink",  # fields to get back
+        "fields": "id,timestamp,children,caption,comment_count,like_count,media_type,media_url,permalink",  # fields to get back
         "access_token": params["access_token"],
     }
     if paging_url == "":  # get first page
@@ -80,6 +83,7 @@ def main_loop_get_hashtag_info_graph_api(
         hashtag_search_response = get_hashtag_posts_graph_api(params, paging_url=url_next_page)
         for post in hashtag_search_response["json_data"]["data"]:  # loop over posts
             data = {
+                "timestamp": pd.to_datetime(post["timestamp"], format="%Y-%m-%dT%H:%M:%S+0000"),
                 "post_id": post["id"],
                 "post_url": post["permalink"],
                 "caption": post["caption"],

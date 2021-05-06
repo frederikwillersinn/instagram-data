@@ -14,7 +14,7 @@ def get_creds():
         "client_id": "FB-APP-CLIENT-ID",  # client id from Facebook app (from developers.facebook.com)
         "client_secret": "FB-APP-CLIENT-SECRET",  # client secret from Facebook app (from developers.facebook.com)
         "graph_domain": "https://graph.facebook.com/",  # base domain for api calls
-        "graph_version": "v6.0",  # version of the api we are hitting
+        "graph_version": "v10.0",  # version of the api we are hitting
         "endpoint_base" "https://graph.facebook.com/v6.0/"  # base endpoint with domain and version
         "page_id": "FB-PAGE-ID",  # user"s Facebook page id (from get_user_pages.py)
         "instagram_account_id": "INSTAGRAM-BUSINESS-ACCOUNT-ID",  # user"s Instagram account id (from get_instagram_account.py)
