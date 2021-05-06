@@ -1,7 +1,6 @@
 """ This file opens a browser window, asks you to log in to Instagram and then starts
 scraping user information for the post_urls in file_name_post_info. """
 import os
-import random
 import sys
 import time
 
@@ -9,6 +8,8 @@ import selenium.webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
 
 sys.path.insert(1, os.path.join(sys.path[0], ".."))  # allow import from parent dir
 import settings as s
@@ -25,29 +26,27 @@ def get_user_info_selenium(
         By.XPATH,
         "//div[@id='react-root']/section/main/div/div/article/header/div[2]/div/div/span/a",
     ).click()
-    time.sleep(3)
+    WebDriverWait(webdriver, 10).until(
+        expected_conditions.visibility_of_element_located((By.CSS_SELECTOR, ".fKFbl"))
+    )
     try:
         user_info["user_name"] = webdriver.find_element(By.CSS_SELECTOR, ".fKFbl").text
     except NoSuchElementException:
         user_info["user_name"] = None
-    time.sleep(random.gammavariate(alpha=2, beta=1))
     try:
         user_info["full_name"] = webdriver.find_element(By.XPATH, "//h1").text
     except NoSuchElementException:
         user_info["full_name"] = None
-    time.sleep(random.gammavariate(alpha=2, beta=1))
     try:
         user_info["follower_count"] = webdriver.find_element(
             By.CSS_SELECTOR, ".Y8-fY:nth-child(2) .g47SY"
         ).text
     except NoSuchElementException:
         user_info["follower_count"] = None
-    time.sleep(random.gammavariate(alpha=2, beta=1))
     try:
         user_info["biography"] = webdriver.find_element(By.XPATH, "//div[2]/span").text
     except NoSuchElementException:
         user_info["biography"] = None
-    time.sleep(random.gammavariate(alpha=2, beta=1))
     try:
         user_info["email"] = extract_email_from_string(user_info["biography"])
     except TypeError:
