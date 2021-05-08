@@ -1,11 +1,9 @@
-# Hashtag of interest
-HASHTAG_NAME = "HASHTAG-OF-INTEREST"
-
-# Required for Instagram Graph API
+# Required for Instagram Graph API (get_hashtag_info_graph_api.py)
+HASHTAG_NAME = "HASHTAG-OF-INTEREST"  # Hashtag of interest
 NUM_PAGES = 2  # Number of Instagram pages to request, 1 page contains 25 posts
 MEDIA_TYPE = "top_media"  # Type of media to request, options: "top_media", "recent_media"
 
-# Required for Selenium
+# Required for Selenium (get_user_info_selenium.py)
 CHROMEDRIVER_PATH = "PATH-TO-CHROMEDRIVER"
 
 # File names
