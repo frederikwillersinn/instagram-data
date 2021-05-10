@@ -160,7 +160,7 @@ def clean_letterlike_characters(string_input: str) -> str:
 def preprocess_instagram_data(
     file_name_post_info: str = s.FILE_NAME_POST_INFO,
     file_name_user_info: str = s.FILE_NAME_USER_INFO,
-    file_name_output: str = s.FILE_NAME_OUTPUT,
+    file_name_output: str = s.FILE_NAME_USER_INFO_CLEAN,
     delimiter: str = ","
 ) -> None:
     df_posts = pd.read_csv(file_name_post_info)
@@ -192,6 +192,6 @@ if __name__ == "__main__":
     preprocess_instagram_data(
         file_name_post_info=s.FILE_NAME_POST_INFO,
         file_name_user_info=s.FILE_NAME_USER_INFO,
-        file_name_output=s.FILE_NAME_OUTPUT,
+        file_name_output=s.FILE_NAME_USER_INFO_CLEAN,
         delimiter=","
     )

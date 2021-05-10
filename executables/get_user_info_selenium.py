@@ -13,7 +13,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 sys.path.insert(1, os.path.join(sys.path[0], ".."))  # allow import from parent dir
 import settings as s
-from utils import get_list_of_col_values, extract_email_from_string, append_dict_to_csv
+from utils import extract_email_from_string, append_dict_to_csv
 
 
 def get_user_info_selenium(
@@ -55,12 +55,12 @@ def get_user_info_selenium(
 
 
 def main_loop_get_user_info_selenium(
+        url_list: list = s.URL_LIST,
         num_first_post: int = 1,
         num_last_post: int = None,
         login_first: bool = True,
         login_pause: int = 60,
         scrape_pause: int = 10,
-        file_name_post_info: str = s.FILE_NAME_POST_INFO,
         file_name_user_info: str = s.FILE_NAME_USER_INFO,
 ):
     """This function opens a browser window, asks you to log in to Instagram and then
@@ -69,10 +69,9 @@ def main_loop_get_user_info_selenium(
     if login_first:
         webdriver.get("https://www.instagram.com")
         time.sleep(login_pause)
-    url_list = get_list_of_col_values(file_name_post_info, "post_url")
-    url_list = url_list[num_first_post - 1: num_last_post]
-    for num_iteration, url in enumerate(url_list):
-        print(f"Scraping user info for post {num_iteration + 1} of {len(url_list)}...")
+    post_url_list = url_list[num_first_post - 1: num_last_post]
+    for num_iteration, url in enumerate(post_url_list):
+        print(f"Scraping user info for post {num_iteration + 1} of {len(post_url_list)}...")
         get_user_info_selenium(
             webdriver=webdriver, post_url=url, file_name_user_info=file_name_user_info
         )
@@ -83,11 +82,11 @@ def main_loop_get_user_info_selenium(
 
 if __name__ == "__main__":
     main_loop_get_user_info_selenium(
+        url_list=s.URL_LIST,
         num_first_post=1,  # Set this if scraping was interrupted for any reason
         num_last_post=None,
         login_first=True,
         login_pause=30,
         scrape_pause=10,
-        file_name_post_info=s.FILE_NAME_POST_INFO,
         file_name_user_info=s.FILE_NAME_USER_INFO,
     )
