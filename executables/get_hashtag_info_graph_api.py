@@ -86,7 +86,7 @@ def main_loop_get_hashtag_info_graph_api(
                 "timestamp": pd.to_datetime(post["timestamp"], format="%Y-%m-%dT%H:%M:%S+0000"),
                 "post_id": post["id"],
                 "post_url": post["permalink"],
-                "caption": post["caption"],
+                "caption": post.get("caption", None),  # caption may be missing
                 "media_type": post["media_type"],
                 "like_count": post["like_count"],
             }
