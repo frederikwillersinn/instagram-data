@@ -131,7 +131,7 @@ def mathematical_monospace_digits() -> dict:
     }
 
 
-def clean_letterlike_characters(string_input: str) -> str:
+def clean_letterlike_characters(string_input: str, email: bool = False) -> str:
     """Helpful lookup for investigating unicode characters: https://unicode.scarfboy.com
     This function cleans a string with  unicode characters.
     >>> clean_letterlike_characters('𝓕𝓲𝓻𝓼𝓽𝓷𝓪𝓶𝓮 𝓛𝓪𝓼𝓽𝓷𝓪𝓶𝓮🦄💪')
@@ -151,7 +151,10 @@ def clean_letterlike_characters(string_input: str) -> str:
             string_output += small_uppercase_letters()[letter]
         else:
             string_output += unicodedata.normalize("NFKD", letter)
-    string_output = re.sub(r"[^a-zA-Z0-9-@._ +]", "", string_output)  # remove special characters
+    if email:  # remove non email characters
+        string_output = re.sub(r"[^a-zA-Z0-9-_+@.]", "", string_output)
+    else:  # extract words
+        string_output = " ".join(re.findall(r"[\w-]+|\$[\.-]+", string_output))
     string_output = string_output.lstrip().rstrip()  # remove whitespace from left and right end
     string_output = re.sub(" +", " ", string_output)  # remove multiple whitespace
     return string_output
@@ -171,7 +174,7 @@ def preprocess_instagram_data(
     df = clean_follower_count_col(df, delimiter=delimiter)
     df["full_name_clean"] = df["full_name"].apply(lambda x: clean_letterlike_characters(x))
     df["full_name_clean"] = df["full_name_clean"].str.title()
-    df["email_clean"] = df["email"].apply(lambda x: clean_letterlike_characters(x))
+    df["email_clean"] = df["email"].apply(lambda x: clean_letterlike_characters(x, email=True))
     df["email_clean"] = df["email_clean"].str.lower()
     df = df.drop_duplicates(subset="user_name")
     df = df[[
