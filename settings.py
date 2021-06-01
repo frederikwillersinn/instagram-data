@@ -9,7 +9,8 @@ FILE_NAME_POST_INFO = f"instagram_post_info_{HASHTAG_NAME}_{MEDIA_TYPE}.csv"  # 
 
 # Required for Selenium (get_user_info_selenium.py)
 CHROMEDRIVER_PATH = "PATH-TO-CHROMEDRIVER"
-URL_LIST = get_list_of_col_values(FILE_NAME_POST_INFO, col_name="post_url")  # List of post urls
+URL_LIST = ["URL-1", "URL-2"]  # List of post urls
+# URL_LIST = get_list_of_col_values(FILE_NAME_POST_INFO, col_name="post_url")  # lists all post urls from FILE_NAME_POST_INFO
 
 FILE_NAME_USER_INFO = f"instagram_user_info_{HASHTAG_NAME}_{MEDIA_TYPE}.csv"  # Output file name
 FILE_NAME_USER_INFO_CLEAN = f"instagram_user_info_{HASHTAG_NAME}_{MEDIA_TYPE}_clean.csv"  # Output file name
