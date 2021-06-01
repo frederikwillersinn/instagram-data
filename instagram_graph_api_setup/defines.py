@@ -17,8 +17,9 @@ def get_creds():
         "graph_version": "v10.0",  # version of the api we are hitting
         "endpoint_base": "https://graph.facebook.com/v10.0/",  # base endpoint with domain and version
         "page_id": "FB-PAGE-ID",  # user"s Facebook page id (from get_user_pages.py)
-        "instagram_account_id": "INSTAGRAM-BUSINESS-ACCOUNT-ID",  # user"s Instagram account id (from get_instagram_account.py)
-        "ig_username": "IG-USERNAME"  # user"s Instagram user name
+        "instagram_account_id": "INSTAGRAM-BUSINESS-ACCOUNT-ID",  # user's Instagram account id (from get_instagram_account.py)
+        "ig_username": "IG-USERNAME",  # user"s Instagram user name
+        "debug": False  # debug mode for api call
     }
     return creds
 
