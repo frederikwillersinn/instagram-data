@@ -45,10 +45,16 @@ for instructions on how to get the session id).
 
 ### Instructions:
 
-A. Setup
+A. To install this library:
 
-1. Run ```pip install -r requirements.txt``` in CLI<br>
-This installs required packages from ```requirements.txt```.
+1. In your CLI, navigate to the folder where you want to use this code.
+2. Run ```git clone https://github.com/frederik-schmidt/Instagram-data.git``` to clone the repo on your computer.
+3. We strongly recommend that you use virtual environments to install this library.
+Run ```conda create -n YOUR_ENV_NAME python=3.8 numpy pandas``` to create an environment.
+4. Once the environment is created, run ```conda activate YOUR_ENV_NAME``` to activate it.
+5. Run ```cd Instagram-data``` to navigate to the project directory.
+6. Run ```pip install -r requirements.txt``` to install the required packages from ```requirements.txt```.<br>
+The library is now installed and you can use the code!
 
 B. Excecutables:
 
