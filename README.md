@@ -4,15 +4,21 @@
 
 This repository contains code for extracting different Instagram data:
 1. **Get post info by hashtag name<br>**
-Query Instagram post info (post_url, caption, like_count etc.) by the hashtag name using
-[Hashtag Search](https://developers.facebook.com/docs/instagram-api/guides/hashtag-search/?locale=en_US)
-which is a feature of the official [Instagram Graph API](https://developers.facebook.com/docs/instagram-api/?locale=en_US).
+Input: Instagram hashtag name<br>
+Output: Instagram post info (post_url, caption, like_count, media_type, media_url etc.)<br>
+Tool: [Hashtag Search](https://developers.facebook.com/docs/instagram-api/guides/hashtag-search/?locale=en_US)
+which is a feature of the official [Instagram Graph API](https://developers.facebook.com/docs/instagram-api/?locale=en_US)
+Code: executables/get_hashtag_info_graph_api.py<br>
 2. **Get user info by post url**<br>
-Scrape the user info (user_name, full_name, biography, follower_count) for one or more
-Instagram posts based on the post_url using Selenium.
+Input: Instagram post urls<br>
+Output: Instagram user info (user_name, full_name, biography, follower_count)<br>
+Tool: Selenium<br>
+Code: executables/get_user_info_selenium.py<br>
 3. **Get post info by user name**<br>
-Scrape the latest post info (user_name, caption, likes, tagged_users, hashtags) for one
-or more Instagram profiles based on the user name using instascrape.
+Input: Instagram user name<br>
+Output: Latest post info (user_name, full_name, upload_date, caption, likes, tagged_users, hashtags)<br>
+Tool: Instascrape<br>
+Code: executables/get_user_posts_instascrape.py<br>
 
 ### Requirements
 
@@ -54,7 +60,7 @@ c. Run ```python executables/get_hashtag_info_graph_api.py``` in CLI. This write
 info for an Instagram hashtag to a csv.<br>
 
 2. **Get user info by post url**<br>
-a. In ```settings.py```, define CHROMEDRIVER_PATH (see Requirements) and POST_URL_LIST.
+a. In ```settings.py```, define CHROMEDRIVER_PATH and POST_URL_LIST.
 By default, the post urls from the previous step are used.<br>
 b. Run ```python executables/get_user_info_selenium.py``` in CLI. This writes user info
 from Instagram posts to a csv.<br>
@@ -63,14 +69,14 @@ cleaned csv.<br>
 
 3. **Get post info by user name**<br>
 a. In ```settings.py```, define Instagram USER_NAME_LIST, CHROMEDRIVER_PATH and
-Instagram SESSION_ID (see Requirements).<br>
-b. Run ```python executables/get_user_posts_instasrape.py``` in CLI. This writes recent
+Instagram SESSION_ID.<br>
+b. Run ```python executables/get_user_posts_instascrape.py``` in CLI. This writes recent
 posts of one or more Instagram users to a csv.<br>
 
 ### Limitations
 
 - Instagram Graph API can only access posts from Business and Creator accounts.
-- 2 is only possible with the Instagram Graph API for users which authorized
+- Getting user info is only possible with the Instagram Graph API for users which authorized
 with your app, so you can get an access token which allows you access to their content.
 
 ### Disclaimer
